@@ -1,51 +1,5 @@
 @use 'sass:math';
-
-$_bg: (
-  default: #ebebeb,
-  hover: #ebebeb,
-  focus: #fff,
-  disabled: rgba(#ccc,.1)
-);
-$_border: (
-  default: #ebebeb,
-  hover: #ebebeb,
-  focus: #336cfb,
-  disabled: rgba(#ccc,.5)
-);
-$_color: (
-  default: #1f2022,
-  hover: #1f2022,
-  focus: #1f2022,
-  disabled: #bdbdbd
-);
-
-$tc-input-color: #1f2022;
-$_error-color: #ed5564;
-$_main-fs: 14px;
-$_module: 10px;
-$_module-rem: math.div($_module, $_main-fs) * 1rem;
-$_placeholder-color: #a8a8a8;
-$_border-style: solid;
-$_border-width: 1px;
-$_fs: 1rem;
-$_lh: 1.4285714286;
-$_padding-h: $_module-rem * 2;
-$_padding-v: $_module-rem;
-$_shape: 20px;
-$_animation: ease-in-out;
-$_shadow-hover: 0px 8px 24px rgba(#000,.12);
-
-// size sm
-$_fs-sm: ($_fs * .9);
-$_lh-sm: 1.5873015873;
-$_shape-sm: ($_shape * .8);
-$_padding-v-sm: ($_module-rem * 0.5);
-
-// size lg
-$_fs-lg: ($_fs * 1.3);
-$_lh-lg: 1.0989010989;
-$_shape-lg: ($_shape * 1.5);
-$_padding-v-lg: $_module-rem * 1.5;
+@import '~@ngx-tc/base/src/assets/scss/base.scss';
 
 @-webkit-keyframes autofill {
   to {
@@ -65,36 +19,76 @@ input:-webkit-autofill {
 }
 
 :host {
-  border-radius: $_shape;
-  color: map-get($_color, default);
+  --tc-input-fs: var(--tc-base-fs);
+  --tc-input-ff: var(--tc-base-ff);
+  --tc-input-fw: var(--tc-base-fw);
+  --tc-input-module-rem: var(--tc-base-module-rem);
+  --tc-input-lh: var(--tc-base-lh);
+  --tc-input-shape: calc(var(--tc-input-module-rem) * 2);
+  --tc-input-shadow-hover: var(--tc-base-shadow-hover);
+  --tc-input-padding-h: calc(var(--tc-input-module-rem) * 2);
+  --tc-input-padding-v: var(--tc-input-module-rem);
+  --tc-input-border-style: solid;
+  --tc-input-border-width: #{toRem(1)};
+
+  // colors
+  --tc-input-bg-default: #ebebeb;
+  --tc-input-bg-hover: #ebebeb;
+  --tc-input-bg-focus: #fff;
+  --tc-input-bg-disabled: rgb(204,204,204,.1);
+  --tc-input-bg-error: rgba(237,85,100,.1);
+  --tc-input-border-default: #ebebeb;
+  --tc-input-border-hover: #ebebeb;
+  --tc-input-border-focus: #336cfb;
+  --tc-input-border-disabled: rgb(204,204,204,.5);
+  --tc-input-color-default: #1f2022;
+  --tc-input-color-hover: #1f2022;
+  --tc-input-color-focus: #1f2022;
+  --tc-input-color-disabled: #bdbdbd;
+  --tc-input-color-error: #ed5564;
+  --tc-input-color-placeholder: #a8a8a8;
+
+  // size sm
+  --tc-input-fs-sm: calc(var(--tc-input-fs) * .9);
+  --tc-input-lh-sm: 1.5873015873;
+  --tc-input-shape-sm: calc(var(--tc-input-module-rem) * 1.5);
+  --tc-input-padding-v-sm: calc(var(--tc-input-module-rem) * 0.5);
+
+  // size lg
+  --tc-input-fs-lg: calc(var(--tc-input-fs) * 1.3);
+  --tc-input-lh-lg: 1.0989010989;
+  --tc-input-shape-lg: calc(var(--tc-input-module-rem) * 2.5);
+  --tc-input-padding-v-lg: calc(var(--tc-input-module-rem) * 1.5);
+
+  border-radius: var(--tc-input-shape);
+  color: var(--tc-input-color-default);
   display: block;
-  font-size: $_fs;
-  line-height: $_lh;
+  font-size: var(--tc-input-fs);
+  line-height: var(--tc-input-lh);
   outline: none;
   width: 100%;
 
   .tc-input-wrap {
     align-items: center;
-    background: map-get($_bg, default);
-    border: $_border-width $_border-style map-get($_border, default);
+    background: var(--tc-input-bg-default);
+    border: var(--tc-input-border-width) var(--tc-input-border-style) var(--tc-input-border-default);
     border-radius: inherit;
     cursor: text;
     display: flex;
     outline: none;
-    padding: 0 $_padding-h;
-    padding: 0 calc(#{$_padding-h} - .2em);
+    padding: 0 calc(#{var(--tc-input-padding-h)} - .2em);
     position: relative;
     transition:
-      background .2s $_animation,
-      border .2s $_animation,
-      box-shadow .2s $_animation,
-      color .2s $_animation;
+      background .2s var(--tc-base-animation),
+      border .2s var(--tc-base-animation),
+      box-shadow .2s var(--tc-base-animation),
+      color .2s var(--tc-base-animation);
     will-change: background, border, box-shadow, color;
     width: 100%;
 
     .input-infix {
       flex: auto;
-      min-width: 5px;
+      min-width: #{toRem(5)};
     }
     .input-control {
       background: none;
@@ -105,18 +99,18 @@ input:-webkit-autofill {
       cursor: inherit;
       display: block;
       font: inherit;
-      margin: -$_border-width 0;
+      margin: calc(var(--tc-input-border-width) * -1) 0;
       outline: none;
-      padding: $_padding-v .2em;
+      padding: var(--tc-input-padding-v) .2em;
       width: 100%;
 
       @include placeholder {
-        color: $_placeholder-color;
+        color: var(--tc-input-color-placeholder);
       }
     }
     .input-prefix,
     .input-suffix {
-      color: $_placeholder-color;
+      color: var(--tc-input-color-placeholder);
       flex: none;
       padding: 0 .2em;
     }
@@ -125,7 +119,7 @@ input:-webkit-autofill {
     }
     .char-limiting {
       align-items: center;
-      color: $_placeholder-color;
+      color: var(--tc-input-color-placeholder);
       display: flex;
       font-size: .9em;
       justify-content: center;
@@ -134,39 +128,39 @@ input:-webkit-autofill {
     }
   }
   &:hover {
-    color: map-get($_color, hover);
+    color: var(--tc-input-color-hover);
 
     .tc-input-wrap {
-      background: map-get($_bg, hover);
-      border-color: map-get($_border, hover);
-      box-shadow: $_shadow-hover;
+      background: var(--tc-input-bg-hover);
+      border-color: var(--tc-input-border-hover);
+      box-shadow: var(--tc-input-shadow-hover);
     }
   }
   &.input-focus {
-    color: map-get($_color, focus);
+    color: var(--tc-input-color-focus);
 
     .tc-input-wrap {
-      background: map-get($_bg, focus);
-      border-color: map-get($_border, focus);
-      box-shadow: $_shadow-hover;
+      background: var(--tc-input-bg-focus);
+      border-color: var(--tc-input-border-focus);
+      box-shadow: var(--tc-input-shadow-hover);
     }
   }
   &.ng-invalid.ng-touched,
   .has-error & {
     .tc-input-wrap {
-      background-color: rgba($_error-color, .1);
-      border: 1px solid $_error-color;
+      background-color: var(--tc-input-bg-error);
+      borde-colorr: var(--tc-input-color-error);
     }
   }
   &.input-sm {
-    border-radius: $_shape-sm;
-    font-size: $_fs-sm;
-    line-height: $_lh-sm;
+    border-radius: var(--tc-input-shape-sm);
+    font-size: var(--tc-input-fs-sm);
+    line-height: var(--tc-input-lh-sm);
 
     .tc-input-wrap {
       .input-control {
-        padding-top: $_padding-v-sm;
-        padding-bottom: $_padding-v-sm;
+        padding-top: var(--tc-input-padding-v-sm);
+        padding-bottom: var(--tc-input-padding-v-sm);
       }
       .input-icon {
         font-size: 1.1em;
@@ -174,24 +168,24 @@ input:-webkit-autofill {
     }
   }
   &.input-lg {
-    border-radius: $_shape-lg;
-    font-size: $_fs-lg;
-    line-height: $_lh-lg;
+    border-radius: var(--tc-input-shape-lg);
+    font-size: var(--tc-input-fs-lg);
+    line-height: var(--tc-input-lh-lg);
 
     .tc-input-wrap {
       .input-control {
-        padding-top: $_padding-v-lg;
-        padding-bottom: $_padding-v-lg;
+        padding-top: var(--tc-input-padding-v-lg);
+        padding-bottom: var(--tc-input-padding-v-lg);
       }
     }
   }
   &.input-disabled,
   &.input-readonly {
-    color: map-get($_color, disabled);
+    color: var(--tc-input-color-disabled);
 
     .tc-input-wrap {
-      background-color: map-get($_bg, disabled);
-      border-color:  map-get($_border, disabled);
+      background-color: var(--tc-input-bg-disabled);
+      border-color:  var(--tc-input-border-disabled);
       box-shadow: none !important;
       cursor: not-allowed;
 
