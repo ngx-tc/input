@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
-import { ControlProperties } from '@ngx-tc/base';
+import { ControlProperties, size, TcSize } from '@ngx-tc/base';
 import { controlProperties } from '@ngx-tc/base';
 import { state } from '@ngx-tc/base';
 
@@ -27,15 +27,15 @@ import { state } from '@ngx-tc/base';
     }
   ]
 })
-export class InputComponent implements ControlValueAccessor, OnInit {
+export class InputComponent implements ControlValueAccessor, OnInit, TcSize {
   @HostBinding('class') get class() {
     return 'tc-input';
   };
   @HostBinding('class.input-sm') get smSize() {
-    return this.size === 'sm';
+    return this.tcSize === size.sm;
   }
   @HostBinding('class.input-lg') get lgSize() {
-    return this.size === 'lg';
+    return this.tcSize === size.lg;
   }
   @HostBinding('class.input-focus') get focused() {
     return this.inputFocus;
@@ -50,7 +50,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() suffix?: string | string[];
   @Input() prefixIcon?: string | string[];
   @Input() suffixIcon?: string | string[];
-  @Input() size: string;
+  @Input('size') tcSize: string | size = size.default;
   @Input() required: boolean = false;
   @Input() autoSize: boolean;
   @Input('value') innerValue: string;
@@ -76,7 +76,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.simpleInput = true;
     this.type = 'text';
     this.name = '';
-    this.size = 'md';
     this.inputFocus = false;
     this.readonly = false;
     this.disabled = false;
@@ -201,7 +200,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     border: string | string[] | undefined = this.borderColor,
     color: string | string[] | undefined = this.color
   ) {
-    let styleIndex: number = 0;
+    let styleIndex: number;
 
     switch (st) {
       case this.states.hover:
