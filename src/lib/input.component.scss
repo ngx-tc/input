@@ -149,7 +149,7 @@ input:-webkit-autofill {
   .has-error & {
     .tc-input-wrap {
       background-color: var(--tc-input-bg-error);
-      borde-color: var(--tc-input-color-error);
+      border-color: var(--tc-input-color-error);
     }
   }
   &.input-sm {
