@@ -1,8 +1,8 @@
 <div class="tc-input-wrap" (click)="onFocus(disabled || readonly)" [ngStyle]="getStyles()">
   <div
+    *ngIf="properties.prefixIconValue"
     class="input-prefix input-icon"
     [ngStyle]="{ 'color': properties.prefixIconColor }"
-    *ngIf="properties.prefixIconValue"
   >
     <span class="{{ properties.prefixIconValue }}"></span>
   </div>
@@ -26,17 +26,17 @@
     >
   </div>
 
-  <div class="input-suffix" *ngIf="properties.suffixValue" [ngStyle]="{ 'color': properties.suffixColor }">
+  <div *ngIf="properties.suffixValue" class="input-suffix" [ngStyle]="{ 'color': properties.suffixColor }">
     {{ properties.suffixValue }}
   </div>
 
   <div
+    *ngIf="properties.suffixIconValue"
     class="input-suffix input-icon"
     [ngStyle]="{ 'color': properties.suffixIconColor }"
-    *ngIf="properties.suffixIconValue"
   >
     <span class="{{ properties.suffixIconValue }}"></span>
   </div>
 
-  <div class="char-limiting" *ngIf="charLimiting && charLimiting > 0">{{ charLength }}</div>
+  <div *ngIf="charLimiting && charLimiting > 0" class="char-limiting">{{ charLength }}</div>
 </div>
