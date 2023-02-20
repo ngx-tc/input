@@ -1,6 +1,6 @@
 # Input
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.5.
 
 ## Code scaffolding
 
