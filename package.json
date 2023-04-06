@@ -1,11 +1,12 @@
 {
   "name": "@ngx-tc/input",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "author": "type0code",
   "license": "MIT",
-  "description": "Angular UI components library",
+  "description": "Angular library that provides customizable form inputs to enhance user experience and simplify form management in Angular applications.",
   "keywords": ["angular", "angular UI", "angular components", "ng", "ngx", "angular form", "angular control", "angular input"],
   "repository": "https://github.com/ngx-tc/input",
+  "homepage": "http://tc-library.type-code.pro/#/components/inputs",
   "config": {
     "access": "public"
   },
@@ -13,7 +14,7 @@
     "@angular/common": "^15.1.5",
     "@angular/core": "^15.1.5",
     "@angular/forms": "^15.1.5",
-    "@ngx-tc/base": "^0.0.17"
+    "@ngx-tc/base": "^1.0.1"
   },
   "dependencies": {
     "tslib": "^2.5.0"

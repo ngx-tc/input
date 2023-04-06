@@ -11,9 +11,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
-import { ControlProperties, size, TcSize } from '@ngx-tc/base';
-import { controlProperties } from '@ngx-tc/base';
-import { state } from '@ngx-tc/base';
+import { ControlProperties, Size, size, TcSize, controlProperties, state } from '@ngx-tc/base';
 
 @Component({
   selector: 'tc-input',
@@ -40,52 +38,40 @@ export class InputComponent implements ControlValueAccessor, OnInit, TcSize {
   @HostBinding('class.input-focus') get focused() {
     return this.inputFocus;
   }
-  @HostBinding('class.input-disabled') @Input() disabled: boolean | null;
-  @HostBinding('class.input-readonly') @Input() readonly: boolean | null;
-  @Input() type: string;
-  @Input() name: string;
+  @HostBinding('class.input-disabled') @Input() disabled: boolean | null = false;
+  @HostBinding('class.input-readonly') @Input() readonly: boolean | null = false;
+  @Input() type: string = 'text';
+  @Input() name: string = '';
   @Input() placeholder?: string;
   @Input() charLimiting?: number;
   @Input() prefix?: string | string[];
   @Input() suffix?: string | string[];
   @Input() prefixIcon?: string | string[];
   @Input() suffixIcon?: string | string[];
-  @Input('size') tcSize: string | size = size.default;
+  @Input('size') tcSize: Size = size.default;
   @Input() required: boolean = false;
-  @Input() autoSize: boolean;
-  @Input('value') innerValue: string;
+  @Input() autoSize: boolean = false;
+  @Input('value') innerValue: string = '';
   @Input() bgColor?: string | string[];
   @Input() borderColor?: string | string[];
   @Input() color?: string | string[];
 
-  @Output() focus: EventEmitter<void>;
-  @Output() blur: EventEmitter<void>;
+  @Output() focus: EventEmitter<void> = new EventEmitter<void>();
+  @Output() blur: EventEmitter<void> = new EventEmitter<void>();
 
-  inputFocus: boolean;
-  simpleInput: boolean;
+  inputFocus: boolean = false;
+  simpleInput: boolean = true;
   charLength?: number;
-  properties: ControlProperties;
+  properties: ControlProperties = Object.assign({}, controlProperties);
   currentBgColor?: string;
   currentBorderColor?: string;
   currentColor?: string;
-  states: any;
+  states = state;
+
   onChange: any = () => { };
   onTouched: any = () => { };
 
-  constructor(public element: ElementRef) {
-    this.simpleInput = true;
-    this.type = 'text';
-    this.name = '';
-    this.inputFocus = false;
-    this.readonly = false;
-    this.disabled = false;
-    this.autoSize = false;
-    this.innerValue = '';
-    this.properties = Object.assign({}, controlProperties);
-    this.states = state;
-    this.blur = new EventEmitter<void>();
-    this.focus = new EventEmitter<void>();
-  }
+  constructor(public element: ElementRef) {}
 
   ngOnInit() {
     if (this.charLimiting && this.charLimiting > 0) {
