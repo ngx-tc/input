@@ -1,24 +1,35 @@
-# Input
+## About
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.5.
+The ngx-tc/input library is an Angular module that provides custom form inputs to developers. It is designed to simplify the process of creating custom inputs and to make it easy to create inputs that meet specific requirements.
 
-## Code scaffolding
+The ngx-tc/input library is built using Angular and is designed to be lightweight and easy to use. Minimal setup is required to get started, and the library is fully compatible with reactive forms and template-driven forms. It also includes features like validation, disabled/enabled inputs, and various styles to give users more control over the look and feel of their forms.
 
-Run `ng generate component component-name --project input` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project input`.
-> Note: Don't forget to add `--project input` or else it will be added to the default project in your `angular.json` file. 
+## Usage
 
-## Build
+Install `@ngx-tc/input` in your project:
 
-Run `ng build input` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+npm install @ngx-tc/input
+```
 
-## Publishing
+Import `TcInputModule` e.g. in your `app.module.ts`:
+```typescript
+import { TcInputModule } from '@ngx-tc/input';
 
-After building your library with `ng build input`, go to the dist folder `cd dist/input` and run `npm publish`.
+@NgModule({
+  imports: [
+    ...
+    TcInputModule
+  ],
+})
+export class AppModule {}
+```
 
-## Running unit tests
+Use the `tc-input` component in you app:
+```html
+<tc-input formControlName="controlName"></tc-input>
+```
 
-Run `ng test input` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Demo
+To view a working demo of the library in action, please follow the provided link. The demo will allow you to explore the various components and features included in this library and see how they can be used in your Angular applications.
+[http://tc-library.type-code.pro/#/components/inputs](http://tc-library.type-code.pro/#/components/inputs)
